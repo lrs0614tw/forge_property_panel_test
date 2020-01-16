@@ -17,14 +17,14 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
         this.container.classList.add('adn-docking-panel');
         this.container.classList.add('adn-model-structure-panel');
         $('.adn-model-structure-panel').css({
-            'width': '20%',
+            'width': '15%',
             'height': '50%',
         });
         $('.adn-docking-panel').css({
             'top':'calc(2% + ' + toolbar.getDimensions().height + 'px)',
             'left': 'calc(5% + ' + toolbar.getDimensions().width + 'px)'
         });
-        
+       
         this.createScrollContainer(options);
         console.log(options,this.options);
         this.viewer = viewer;
@@ -32,12 +32,20 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
         this.uiCreated = false;
 
         this.addVisibilityListener((show) => {
-            if (!show) return;
+            if (!show) 
+            {
+                toolbar.addEventListener(Autodesk.Viewing.UI.Button.Event.STATE_CHANGED,"Autodesk.Research.TtIf.Extension.Toolbar.CGB1",Autodesk.Viewing.UI.Button.State.ACTIVE);
+
+            };
 
             if (!this.uiCreated)
                 this.createUI();
             //this.sizeToContent(this.container);
         });
+        
+    }
+    initializeMoveHandlers(draggableElement) {
+        // do nothing here; panel won't be draggable    
     }
     hasTask(model, dbId, matches) {
         return new Promise(function (resolve, reject) {

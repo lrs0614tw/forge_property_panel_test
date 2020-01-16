@@ -67,7 +67,7 @@ function getAlldbIds(root) {
   return alldbId;
 };
 //var selection = viewer.getSelection();
-viewer.getProperties(selection[0], function (result) {
+/*viewer.getProperties(selection[0], function (result) {
   const props = result.properties;
   for (let i = 0; i < props.length; i++) {
     const property = props[i];
@@ -79,4 +79,4 @@ viewer.getProperties(selection[0], function (result) {
       console.log(category);
     }
   }
-});
+});*/
