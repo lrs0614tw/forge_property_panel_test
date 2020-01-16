@@ -1,72 +1,3 @@
-class ModelStructurePanelExtension extends Autodesk.Viewing.Extension {
-    constructor(viewer, options) {
-        super(viewer, options);
-        this._group = null;
-        this._button = null;
-        this.createUI = this.createUI.bind(this);
-        this.onToolbarCreated = this.onToolbarCreated.bind(this);
-    }
-
-    onToolbarCreated() {
-        this.viewer.removeEventListener(
-            Autodesk.Viewing.TOOLBAR_CREATED_EVENT,
-            this.onToolbarCreated
-        );
-        this.createUI();
-    }
-
-    createUI() {
-        const viewer = this.viewer;
-
-        const modelStructurePanel = new ModelStructurePanel(viewer, '設備列表');
-
-        this.panel = modelStructurePanel;
-        //viewer.addPanel(modelStructurePanel);
-
-        const structureButton = new Autodesk.Viewing.UI.Button('toolbar-adnModelStructureTool');
-        structureButton.setToolTip('browser');
-        structureButton.addClass('AdnModelStructurePanelExtensionIcon');
-        structureButton.onClick = function () {
-            modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-        };
-
-        const subToolbar = new Autodesk.Viewing.UI.ControlGroup('toolbar-adn-tools');
-        subToolbar.addControl(structureButton);
-        subToolbar.adnstructurebutton = structureButton;
-        this.subToolbar = subToolbar;
-
-        viewer.toolbar.addControl(this.subToolbar);
-
-        modelStructurePanel.addVisibilityListener(function (visible) {
-            if (visible)
-                viewer.onPanelVisible(modelStructurePanel, viewer);
-
-            structureButton.setState(visible ? Autodesk.Viewing.UI.Button.State.ACTIVE : Autodesk.Viewing.UI.Button.State.INACTIVE);
-        });
-    }
-
-    load() {
-        console.log('ModelStructurePanelExtension has been loaded');
-        return true;
-    }
-
-    unload() {
-        if (this._group) {
-            this._group.removeControl(this._button);
-            if (this._group.getNumberOfControls() === 0) {
-                this.viewer.toolbar.removeControl(this._group);
-            }
-        }
-        console.log('ModelStructurePanelExtension has been unloaded');
-        return true;
-    }
-}
-try {
-    Autodesk.Viewing.theExtensionManager.registerExtension('ModelStructurePanelExtension', ModelStructurePanelExtension);
-} catch (error) {
-}
-
-
 class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
     constructor(viewer, title, options) {
         options = options || {};
@@ -85,6 +16,17 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
         this.container.classList.add('adn-docking-panel');
         this.container.classList.add('adn-model-structure-panel');
+        $('.adn-model-structure-panel').css({
+            'width': '370px',
+            'height': '530px',
+            'min-width': '370px',
+            'min-height': '530px'
+        });
+        $('.adn-docking-panel').css({
+            'top': '10px',
+            'left': '10px'
+        });
+        
         this.createScrollContainer(options);
         console.log(options,this.options);
         this.viewer = viewer;
@@ -247,3 +189,71 @@ function guid() {
 
     return guid;
 }
+
+/*class ModelStructurePanelExtension extends Autodesk.Viewing.Extension {
+    constructor(viewer, options) {
+        super(viewer, options);
+        this._group = null;
+        this._button = null;
+        this.createUI = this.createUI.bind(this);
+        this.onToolbarCreated = this.onToolbarCreated.bind(this);
+    }
+
+    onToolbarCreated() {
+        this.viewer.removeEventListener(
+            Autodesk.Viewing.TOOLBAR_CREATED_EVENT,
+            this.onToolbarCreated
+        );
+        this.createUI();
+    }
+
+    createUI() {
+        const viewer = this.viewer;
+
+        const modelStructurePanel = new ModelStructurePanel(viewer, '設備列表');
+
+        this.panel = modelStructurePanel;
+        //viewer.addPanel(modelStructurePanel);
+
+        const structureButton = new Autodesk.Viewing.UI.Button('toolbar-adnModelStructureTool');
+        structureButton.setToolTip('browser');
+        structureButton.addClass('AdnModelStructurePanelExtensionIcon');
+        structureButton.onClick = function () {
+            modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
+        };
+
+        const subToolbar = new Autodesk.Viewing.UI.ControlGroup('toolbar-adn-tools');
+        subToolbar.addControl(structureButton);
+        subToolbar.adnstructurebutton = structureButton;
+        this.subToolbar = subToolbar;
+
+        viewer.toolbar.addControl(this.subToolbar);
+
+        modelStructurePanel.addVisibilityListener(function (visible) {
+            if (visible)
+                viewer.onPanelVisible(modelStructurePanel, viewer);
+
+            structureButton.setState(visible ? Autodesk.Viewing.UI.Button.State.ACTIVE : Autodesk.Viewing.UI.Button.State.INACTIVE);
+        });
+    }
+
+    load() {
+        console.log('ModelStructurePanelExtension has been loaded');
+        return true;
+    }
+
+    unload() {
+        if (this._group) {
+            this._group.removeControl(this._button);
+            if (this._group.getNumberOfControls() === 0) {
+                this.viewer.toolbar.removeControl(this._group);
+            }
+        }
+        console.log('ModelStructurePanelExtension has been unloaded');
+        return true;
+    }
+}
+try {
+    Autodesk.Viewing.theExtensionManager.registerExtension('ModelStructurePanelExtension', ModelStructurePanelExtension);
+} catch (error) {
+}*/

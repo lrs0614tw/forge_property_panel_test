@@ -62,7 +62,7 @@ html, body {
   background-repeat: no-repeat;
   background-position: center;
 }
-.adn-docking-panel {
+/*.adn-docking-panel {
   top: 10px;
   left: 10px;
 }
@@ -72,7 +72,7 @@ html, body {
   height: 530px;
   min-width: 370px;
   min-height: 530px;
-}
+}*/
 /*.adsk-viewing-viewer #toolbar-fullscreenTool{display:none!important}
 .adsk-viewing-viewer #toolbar-explodeTool{display:none!important}
 .adsk-viewing-viewer #toolbar-measurementSubmenuTool{display:none!important}*/

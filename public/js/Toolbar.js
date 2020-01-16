@@ -99,7 +99,7 @@ class Toolbar extends Autodesk.Viewing.Extension {
         $('#divToolbar').css({
             'top': '0%',
             'left': '0%',
-            'position': 'absolute'
+            'position': 'absolute',
         });
         $('#divToolbar')[0].appendChild(toolbar.container);
         // After a delay we'll center it on screen
