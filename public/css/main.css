@@ -1,0 +1,78 @@
+html, body {
+    min-height: 100%;
+    height: 100%;
+  }
+  
+  .fill {
+    height: calc(100vh);
+  }
+  #forgeViewer {
+    width: 100%;
+  }
+  
+  .myAwesomeExtensionIcon {
+    background-image: url(C:\Users\Louis\Desktop\bulb-curvy-flat.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.handleSelectionExtensionIcon {
+    background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/object-group.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.modelSummaryExtensionIcon {
+    background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/dashboard.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .AdnModelStructurePanelExtensionIcon {
+    background-image: url(https://www.flaticon.com/premium-icon/icons/svg/1146/1146273.svg);
+    background-size: 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .transition-width {
+    transition: width 1s ease-in-out;
+  }
+  
+  .dashboardPanel {
+    width: 100%;
+    padding: 3%;
+    display: block;
+  }
+  .col-sm-8
+    {
+      height:100%;
+    width:100%;
+  }
+.handleSelectionExtensionIcon {
+  background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/object-group.png);
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.modelSummaryExtensionIcon {
+  background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/dashboard.png);
+  background-size: 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.adn-docking-panel {
+  top: 10px;
+  left: 10px;
+}
+
+.adn-model-structure-panel .docking-panel-scroll div:first-child {
+  width: 370px;
+  height: 530px;
+  min-width: 370px;
+  min-height: 530px;
+}
+/*.adsk-viewing-viewer #toolbar-fullscreenTool{display:none!important}
+.adsk-viewing-viewer #toolbar-explodeTool{display:none!important}
+.adsk-viewing-viewer #toolbar-measurementSubmenuTool{display:none!important}*/
