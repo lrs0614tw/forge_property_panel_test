@@ -22,8 +22,8 @@ class Toolbar extends Autodesk.Viewing.Extension {
         const modelStructurePanel = new ModelStructurePanel(viewer, '設備列表');
         // Names, icons and tooltips for our toolbar buttons
         var names = ['CGB1', 'CGB2', 'CGB3'];
-        var icons = ['list', 'wrench', 'blackboard'];
-        var tips = ['Equipment List', 'Show/Hide ToolBar', 'Properties Panel'];
+        var icons = ['list', 'wrench', 'sunglasses'];
+        var tips = ['Equipment List', 'Show/Hide ToolBar', 'Isolate'];
         var buttonList=[];
         // Operations for when the buttons are clicked
         var clicks =
@@ -31,16 +31,21 @@ class Toolbar extends Autodesk.Viewing.Extension {
                 function () {
 
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                    console.log('Dashboard clicked', modelStructurePanel.isVisible());
                 },
                 function () {
-                    console.log('Temperature clicked');
                     viewer.toolbar.getControl('settingsTools').setVisible(true);
                     viewer.toolbar.getControl('modelTools').setVisible(true);
                     viewer.toolbar.getControl('navTools').setVisible(true);
                     
                 },
-                function () { console.log('Power clicked'); }
+                function () { 
+                    var DBids = viewer.impl.selector.getAggregateSelection(); 
+                    try {
+                    viewer.isolate(DBids[0].selection);
+                    } catch (error) {
+                        buttonList[2].setState(Autodesk.Viewing.UI.Button.State.INACTIVE);
+                    }
+                }
             ]
         // Operations for when buttons are unclicked (i.e. toggled off)
         // If false, then the button won't have any 'state'
@@ -48,15 +53,15 @@ class Toolbar extends Autodesk.Viewing.Extension {
             [
                 function () {
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                    console.log('Dashboard clicked');
                 },
                 function () {
-                    console.log('Temperature clicked');
                     viewer.toolbar.getControl('settingsTools').setVisible(false);
                     viewer.toolbar.getControl('modelTools').setVisible(false);
                     viewer.toolbar.getControl('navTools').setVisible(false);
                 },
-                function () { console.log('Power clicked'); }
+                function () {  
+                    viewer.showAll();
+                }
             ]
         // The loop to create our buttons
         var button;
