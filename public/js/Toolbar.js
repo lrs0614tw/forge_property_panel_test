@@ -88,9 +88,17 @@ class Toolbar extends Autodesk.Viewing.Extension {
         $(viewer.container).append(toolbarDivHtml);
         // We want our toolbar to be centered vertically on the page
         toolbar.centerToolBar = function () {
-            console.log("toolbar.getDimensions().height",toolbar.getDimensions().height);
             $('#divToolbar').css({
                 'top':'calc(4% + ' + toolbar.getDimensions().height + 'px)'
+            });
+            $('.adn-model-structure-panel').css({
+                'width': '15%',
+                'height': '50%',
+            });
+            $('.adn-docking-panel').css({
+                'top': 'calc(4% + ' + toolbar.getDimensions().height + 'px)',
+                'left':'calc(1% + ' + toolbar.getDimensions().width + 'px)',
+                'position': 'absolute',
             });
         };
         /*toolbar.addEventListener(
@@ -100,12 +108,10 @@ class Toolbar extends Autodesk.Viewing.Extension {
         // Start by placing our toolbar off-screen (top: 0%)
         $('#divToolbar').css({
             //'top': '0%',
-            'left': '0%',
+            'left': '1%',
             'position': 'absolute',
         });
-        console.log($('#divToolbar'),$('#divToolbar')[0]);
         $('#divToolbar')[0].appendChild(toolbar.container);
-        console.log($('#divToolbar'),$('#divToolbar')[0]);
         // After a delay we'll center it on screen
         setTimeout(function () { toolbar.centerToolBar(); }, 100);
         modelStructurePanel.addVisibilityListener(function( visible ) {

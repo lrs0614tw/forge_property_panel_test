@@ -13,14 +13,14 @@ class PropertiesPanel extends Autodesk.Viewing.UI.DockingPanel {
             options.left = false;
 
         super(viewer.container, viewer.container.id + 'PropertiesPanel', title, options);
-        $('.adn-model-structure-panel').css({
+        /*$('.adn-model-structure-panel').css({
             'width': '15%',
             'height': '50%',
         });
         $('.adn-docking-panel').css({
             'top': 'calc(3% + ' + toolbar.getDimensions().height + 'px)',
             'left': 'calc(5% + ' + toolbar.getDimensions().width + 'px)'
-        });
+        });*/
 
         this.createScrollContainer(options);
         this.viewer = viewer;
