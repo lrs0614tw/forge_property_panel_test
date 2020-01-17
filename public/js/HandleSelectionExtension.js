@@ -54,13 +54,6 @@ class HandleSelectionExtension extends Autodesk.Viewing.Extension {
                 }
 
             }
-
-            /*var rootId = it.getRootId();
-            var rootName = it.getNodeName( rootId );
-            it.enumNodeChildren( rootId, function( childId ) {
-                var childName = it.getNodeName(childId);
-            });*/
-
         };
         this._button.setToolTip('Handle Selection Extension');
         this._button.addClass('handleSelectionExtensionIcon');

@@ -28,7 +28,6 @@ function onDocumentLoadSuccess(doc) {
       var root = tree.root;
       var allDbIds = getAlldbIds(root);
       viewer.fitToView(allDbIds);
-      console.log(allDbIds);
     });
     viewer.toolbar.getControl('settingsTools').setVisible(false);
     viewer.toolbar.getControl('modelTools').setVisible(false);

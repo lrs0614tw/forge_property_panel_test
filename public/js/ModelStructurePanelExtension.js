@@ -2,7 +2,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
     constructor(viewer, title, options) {
         options = options || {};
 
-          //Height adjustment for scroll container, offset to height of the title bar and footer by default.
+        //Height adjustment for scroll container, offset to height of the title bar and footer by default.
         if (!options.heightAdjustment)
             options.heightAdjustment = 70;
 
@@ -14,6 +14,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
         super(viewer.container, viewer.container.id + 'AdnModelStructurePanel', title, options);
         var toolbar = new Autodesk.Viewing.UI.ToolBar('toolbar-TtIf');
+        console.log("toolbar.getDimensions().height:",toolbar.getDimensions().height);
         this.container.classList.add('adn-docking-panel');
         this.container.classList.add('adn-model-structure-panel');
         $('.adn-model-structure-panel').css({
@@ -21,20 +22,19 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
             'height': '50%',
         });
         $('.adn-docking-panel').css({
-            'top':'calc(2% + ' + toolbar.getDimensions().height + 'px)',
+            'top': 'calc(2% + '+ toolbar.getDimensions().height  + 'px)',
             'left': 'calc(5% + ' + toolbar.getDimensions().width + 'px)'
         });
-       
+
         this.createScrollContainer(options);
-        console.log(options,this.options);
+        console.log(options, this.options);
         this.viewer = viewer;
         this.options = options;
         this.uiCreated = false;
 
         this.addVisibilityListener((show) => {
-            if (!show) 
-            {
-                toolbar.addEventListener(Autodesk.Viewing.UI.Button.Event.STATE_CHANGED,"Autodesk.Research.TtIf.Extension.Toolbar.CGB1",Autodesk.Viewing.UI.Button.State.ACTIVE);
+            if (!show) {
+                toolbar.addEventListener(Autodesk.Viewing.UI.Button.Event.STATE_CHANGED, "Autodesk.Research.TtIf.Extension.Toolbar.CGB1", Autodesk.Viewing.UI.Button.State.ACTIVE);
 
             };
 
@@ -42,7 +42,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                 this.createUI();
             //this.sizeToContent(this.container);
         });
-        
+
     }
     initializeMoveHandlers(draggableElement) {
         // do nothing here; panel won't be draggable    
@@ -61,7 +61,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                 //for (let i = 0; i < result.properties.length; ++i) {
                 const prop = result.properties[0];
                 //check if we have a match
-                if (!nodeName.includes("洗衣机 [")&&!nodeName.includes("卧式水泵1 [")) {
+                if (!nodeName.includes("洗衣机 [") && !nodeName.includes("卧式水泵1 [")) {
                     return resolve();
                 }
 
@@ -151,6 +151,10 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
                             viewer.select(dbIds);
                             viewer.fitToView(dbIds);
+                            setTimeout(function(){
+                                zoom() //This will work fine
+                            }, 1000)
+                            
                         })
                         .jstree({
                             core: {
@@ -194,6 +198,17 @@ function guid() {
         });
 
     return guid;
+}
+function zoom (){
+    var nav = viewer.navigation;
+    var pos = nav.getPosition();
+    var target = nav.getTarget();
+    var viewdir = new THREE.Vector3();
+    viewdir.subVectors (pos, target).normalize();
+    // zooms out by 100 along the view direction
+    viewdir.multiplyScalar (50);
+    pos.add(viewdir);
+    nav.setPosition(pos);
 }
 
 /*class ModelStructurePanelExtension extends Autodesk.Viewing.Extension {
