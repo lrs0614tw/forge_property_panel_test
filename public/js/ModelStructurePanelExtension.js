@@ -14,20 +14,17 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
         super(viewer.container, viewer.container.id + 'AdnModelStructurePanel', title, options);
         var toolbar = new Autodesk.Viewing.UI.ToolBar('toolbar-TtIf');
-        console.log("toolbar.getDimensions().height:",toolbar.getDimensions().height);
-        this.container.classList.add('adn-docking-panel');
         this.container.classList.add('adn-model-structure-panel');
         $('.adn-model-structure-panel').css({
             'width': '15%',
             'height': '50%',
         });
         $('.adn-docking-panel').css({
-            'top': 'calc(2% + '+ toolbar.getDimensions().height  + 'px)',
-            'left': 'calc(5% + ' + toolbar.getDimensions().width + 'px)'
+            'top': 'calc(2%)',// + '+ toolbar.getDimensions().height  + 'px)',
+            'left': 'calc(5%)'// + ' + toolbar.getDimensions().width + 'px)'
         });
 
         this.createScrollContainer(options);
-        console.log(options, this.options);
         this.viewer = viewer;
         this.options = options;
         this.uiCreated = false;

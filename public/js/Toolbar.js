@@ -127,7 +127,6 @@ class Toolbar extends Autodesk.Viewing.Extension {
 }
 try {
     Autodesk.Viewing.theExtensionManager.registerExtension('Toolbar', Toolbar);
-    console.log('good');
 } catch (error) {
     console.log('error');
 }
