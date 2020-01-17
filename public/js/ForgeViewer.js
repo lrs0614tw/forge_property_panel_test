@@ -1,6 +1,7 @@
 var viewer;
 
 function launchViewer(urn) {
+  console.log(urn)
   var options = {
     env: 'AutodeskProduction',
     getAccessToken: getForgeToken
@@ -27,6 +28,7 @@ function onDocumentLoadSuccess(doc) {
       var root = tree.root;
       var allDbIds = getAlldbIds(root);
       viewer.fitToView(allDbIds);
+      console.log(allDbIds);
     });
     viewer.toolbar.getControl('settingsTools').setVisible(false);
     viewer.toolbar.getControl('modelTools').setVisible(false);

@@ -30,17 +30,16 @@ class Toolbar extends Autodesk.Viewing.Extension {
                 function () {
 
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                    //console.log('Dashboard clicked', modelStructurePanel.isVisible());
+                    console.log('Dashboard clicked', modelStructurePanel.isVisible());
                 },
                 function () {
-                    //console.log('Temperature clicked');
+                    console.log('Temperature clicked');
                     viewer.toolbar.getControl('settingsTools').setVisible(true);
                     viewer.toolbar.getControl('modelTools').setVisible(true);
                     viewer.toolbar.getControl('navTools').setVisible(true);
                     
                 },
-                function () { //console.log('Power clicked'); 
-            }
+                function () { console.log('Power clicked'); }
             ]
         // Operations for when buttons are unclicked (i.e. toggled off)
         // If false, then the button won't have any 'state'
@@ -48,16 +47,15 @@ class Toolbar extends Autodesk.Viewing.Extension {
             [
                 function () {
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                    //console.log('Dashboard clicked');
+                    console.log('Dashboard clicked');
                 },
                 function () {
-                    //console.log('Temperature clicked');
+                    console.log('Temperature clicked');
                     viewer.toolbar.getControl('settingsTools').setVisible(false);
                     viewer.toolbar.getControl('modelTools').setVisible(false);
                     viewer.toolbar.getControl('navTools').setVisible(false);
                 },
-                function () { //console.log('Power clicked'); 
-            }
+                function () { console.log('Power clicked'); }
             ]
         // The loop to create our buttons
         var button;
@@ -72,6 +70,7 @@ class Toolbar extends Autodesk.Viewing.Extension {
                 button.icon.classList.add('glyphicon');
                 button.icon.classList.add('glyphicon-' + icons[i]);
             }
+            console.log(button.icon.classList);
             // Set the tooltip
             button.setToolTip(tips[i]);
             // Only create a toggler for our button if it has an unclick operation
@@ -127,6 +126,7 @@ class Toolbar extends Autodesk.Viewing.Extension {
 }
 try {
     Autodesk.Viewing.theExtensionManager.registerExtension('Toolbar', Toolbar);
+    console.log('good');
 } catch (error) {
     console.log('error');
 }
