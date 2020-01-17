@@ -24,6 +24,7 @@ class Toolbar extends Autodesk.Viewing.Extension {
         var names = ['CGB1', 'CGB2', 'CGB3'];
         var icons = ['list', 'wrench', 'blackboard'];
         var tips = ['Equipment List', 'Show/Hide ToolBar', 'Properties Panel'];
+        var buttonList=[];
         // Operations for when the buttons are clicked
         var clicks =
             [
@@ -80,6 +81,7 @@ class Toolbar extends Autodesk.Viewing.Extension {
                 button.onClick = clicks[i];
             }
             ctrlGroup.addControl(button);
+            buttonList.push(button);
         }
         toolbar.addControl(ctrlGroup);
         var toolbarDivHtml = '<div id="divToolbar"> </div>';
@@ -106,6 +108,14 @@ class Toolbar extends Autodesk.Viewing.Extension {
         console.log($('#divToolbar'),$('#divToolbar')[0]);
         // After a delay we'll center it on screen
         setTimeout(function () { toolbar.centerToolBar(); }, 100);
+        modelStructurePanel.addVisibilityListener(function( visible ) {
+            if( visible)
+              {
+                  viewer.onPanelVisible( modelStructurePanel, viewer );
+              }
+            console.log(buttonList);
+            buttonList[0].setState( visible ? Autodesk.Viewing.UI.Button.State.ACTIVE : Autodesk.Viewing.UI.Button.State.INACTIVE );
+          });
     }
     deleteToolbar() {
         $('#divToolbar').remove();
