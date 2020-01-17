@@ -86,21 +86,24 @@ class Toolbar extends Autodesk.Viewing.Extension {
         $(viewer.container).append(toolbarDivHtml);
         // We want our toolbar to be centered vertically on the page
         toolbar.centerToolBar = function () {
+            console.log("toolbar.getDimensions().height",toolbar.getDimensions().height);
             $('#divToolbar').css({
-                'top':'calc(4% + ' + toolbar.getDimensions().height + 'px)'//'calc(50% + ' + toolbar.getDimensions().height / 2 + 'px)'
+                'top':'calc(4% + ' + toolbar.getDimensions().height + 'px)'
             });
         };
-        toolbar.addEventListener(
+        /*toolbar.addEventListener(
             Autodesk.Viewing.UI.ToolBar.Event.SIZE_CHANGED,
             toolbar.centerToolBar
-        );
+        );*/
         // Start by placing our toolbar off-screen (top: 0%)
         $('#divToolbar').css({
-            'top': '0%',
+            //'top': '0%',
             'left': '0%',
             'position': 'absolute',
         });
+        console.log($('#divToolbar'),$('#divToolbar')[0]);
         $('#divToolbar')[0].appendChild(toolbar.container);
+        console.log($('#divToolbar'),$('#divToolbar')[0]);
         // After a delay we'll center it on screen
         setTimeout(function () { toolbar.centerToolBar(); }, 100);
     }
