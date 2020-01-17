@@ -26,7 +26,6 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
         });
 
         this.createScrollContainer(options);
-        console.log(options, this.options);
         this.viewer = viewer;
         this.options = options;
         this.uiCreated = false;

@@ -1,7 +1,6 @@
 var viewer;
 
 function launchViewer(urn) {
-  console.log(urn)
   var options = {
     env: 'AutodeskProduction',
     getAccessToken: getForgeToken
@@ -11,7 +10,6 @@ function launchViewer(urn) {
     //new Autodesk.Viewing.Private.GuiViewer3D(document.getElementById('forgeViewer')).start('https://dukedhx.github.io/Forge-Workshop/shaver/0.svf');
     viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['Toolbar'] });
     viewer.start();
-    console.log('O');
     var documentId = 'urn:' + urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
 
@@ -28,7 +26,6 @@ function onDocumentLoadSuccess(doc) {
       var root = tree.root;
       var allDbIds = getAlldbIds(root);
       viewer.fitToView(allDbIds);
-      console.log(allDbIds);
     });
     viewer.toolbar.getControl('settingsTools').setVisible(false);
     viewer.toolbar.getControl('modelTools').setVisible(false);
