@@ -115,7 +115,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
     buildTree() {
         const viewer = this.viewer;
-
+        var customPropsPanel;
         viewer.getObjectTree(() => {
             const matches = [];
             const taskThunk = (model, dbId) => {
@@ -152,7 +152,19 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                             setTimeout(function(){
                                 zoom() //This will work fine
                             }, 1000)
-                            
+                            if(customPropsPanel!=undefined)
+                            {
+                                customPropsPanel.setVisible(false);
+                                console.log(customPropsPanel);
+                                customPropsPanel=null;
+                            }
+                            else
+                            {
+                                console.log(undefined);
+                                
+                            }
+                            customPropsPanel = new CustomPropsPanel(viewer);
+                            customPropsPanel.setVisible(true);
                         })
                         .jstree({
                             core: {
