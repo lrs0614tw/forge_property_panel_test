@@ -8,7 +8,7 @@ function launchViewer(urn) {
 
   Autodesk.Viewing.Initializer(options, () => {
     //new Autodesk.Viewing.Private.GuiViewer3D(document.getElementById('forgeViewer')).start('https://dukedhx.github.io/Forge-Workshop/shaver/0.svf');
-    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['Toolbar'] });
+    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['Toolbar','CustomPropertyPanelExtension'] });
     viewer.start();
     var documentId = 'urn:' + urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);

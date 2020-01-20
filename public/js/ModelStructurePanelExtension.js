@@ -146,25 +146,24 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                                 const dbId = parseInt(data.node.id);
                                 dbIds = [dbId];
                             }
-
+                            var color= new THREE.Color("rgba(255, 255, 255, 0.0)");
+                            viewer.setSelectionColor(color, Autodesk.Viewing.SelectionType.MIXED );
                             viewer.select(dbIds);
                             viewer.fitToView(dbIds);
+                            viewer.isolate(dbIds);
                             setTimeout(function(){
                                 zoom() //This will work fine
                             }, 1000)
                             if(customPropsPanel!=undefined)
                             {
                                 customPropsPanel.setVisible(false);
-                                console.log(customPropsPanel);
                                 customPropsPanel=null;
                             }
-                            else
-                            {
-                                console.log(undefined);
-                                
-                            }
-                            customPropsPanel = new CustomPropsPanel(viewer);
+                            customPropsPanel = new AdnPropsPanel(viewer,dbIds);
+                            viewer.setPropertyPanel(customPropsPanel);
                             customPropsPanel.setVisible(true);
+
+                            
                         })
                         .jstree({
                             core: {
