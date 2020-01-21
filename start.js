@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 
-const PORT = process.env.PORT || 1996;
+const PORT = process.env.PORT || 1995;
 const config = require('./config');
 if (config.credentials.client_id == null || config.credentials.client_secret == null) {
     console.error('Missing FORGE_CLIENT_ID or FORGE_CLIENT_SECRET env. variables.');

@@ -7,8 +7,7 @@ function launchViewer(urn) {
   };
 
   Autodesk.Viewing.Initializer(options, () => {
-    //new Autodesk.Viewing.Private.GuiViewer3D(document.getElementById('forgeViewer')).start('https://dukedhx.github.io/Forge-Workshop/shaver/0.svf');
-    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['Toolbar','CustomPropertyPanelExtension'] });
+    viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), { extensions: ['Toolbar'] });
     viewer.start();
     var documentId = 'urn:' + urn;
     Autodesk.Viewing.Document.load(documentId, onDocumentLoadSuccess, onDocumentLoadFailure);
@@ -63,18 +62,3 @@ function getAlldbIds(root) {
   };
   return alldbId;
 };
-//var selection = viewer.getSelection();
-/*viewer.getProperties(selection[0], function (result) {
-  const props = result.properties;
-  for (let i = 0; i < props.length; i++) {
-    const property = props[i];
-    if (property.hidden) return;
-
-    const category = props[i].displayCategory;
-    if (category && typeof category === 'string' && category !== '') {
-      // The property group you want 
-      console.log(category);
-    }
-  }
-});*/
-

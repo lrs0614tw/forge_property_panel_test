@@ -159,8 +159,8 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                                 customPropsPanel.setVisible(false);
                                 customPropsPanel=null;
                             }
-                            customPropsPanel = new AdnPropsPanel(viewer,dbIds);
-                            viewer.setPropertyPanel(customPropsPanel);
+                            customPropsPanel = new PropertiesPanel(viewer,dbIds);
+                            //viewer.setPropertyPanel(customPropsPanel);
                             customPropsPanel.setVisible(true);
 
                             
