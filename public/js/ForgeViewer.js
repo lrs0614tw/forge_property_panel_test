@@ -30,6 +30,7 @@ function onDocumentLoadSuccess(doc) {
     viewer.toolbar.getControl('modelTools').setVisible(false);
     viewer.toolbar.getControl('navTools').setVisible(false);
   });
+
 }
 
 function onDocumentLoadFailure(viewerErrorCode) {

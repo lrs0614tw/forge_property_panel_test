@@ -115,7 +115,6 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
     buildTree() {
         const viewer = this.viewer;
-        var customPropsPanel;
         viewer.getObjectTree(() => {
             const matches = [];
             const taskThunk = (model, dbId) => {
@@ -135,7 +134,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                         .on('select_node.jstree', function (e, data) {
                             //console.log(e, data);
                             if (!data) return;
-
+                            var customPropsPanel;
                             let dbIds = [];
                             viewer.clearSelection();
 
@@ -146,24 +145,24 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                                 const dbId = parseInt(data.node.id);
                                 dbIds = [dbId];
                             }
-                            var color= new THREE.Color("rgba(255, 255, 255, 0.0)");
-                            viewer.setSelectionColor(color, Autodesk.Viewing.SelectionType.MIXED );
+                            var color = new THREE.Color("rgba(255, 255, 255, 0.0)");
+                            viewer.setSelectionColor(color, Autodesk.Viewing.SelectionType.MIXED);
                             viewer.select(dbIds);
                             viewer.fitToView(dbIds);
                             viewer.isolate(dbIds);
-                            setTimeout(function(){
+                            setTimeout(function () {
                                 zoom() //This will work fine
                             }, 1000)
-                            if(customPropsPanel!=undefined)
-                            {
+                            if (customPropsPanel != undefined) {
                                 customPropsPanel.setVisible(false);
-                                customPropsPanel=null;
+                                customPropsPanel = null;
                             }
-                            customPropsPanel = new PropertiesPanel(viewer,dbIds);
-                            //viewer.setPropertyPanel(customPropsPanel);
+                            viewer.addEventListener(Autodesk.Viewing.TOOLBAR_CREATED_EVENT, () => { console.log(viewer.getPropertyPanel(true)) });
+                            customPropsPanel = new PropertiesPanel(viewer);
+                            viewer.addPanel(customPropsPanel);
                             customPropsPanel.setVisible(true);
-
-                            
+                            customPropsPanel.setCProperties(dbIds);
+                            customPropsPanel.showEnd();
                         })
                         .jstree({
                             core: {
@@ -208,14 +207,14 @@ function guid() {
 
     return guid;
 }
-function zoom (){
+function zoom() {
     var nav = viewer.navigation;
     var pos = nav.getPosition();
     var target = nav.getTarget();
     var viewdir = new THREE.Vector3();
-    viewdir.subVectors (pos, target).normalize();
+    viewdir.subVectors(pos, target).normalize();
     // zooms out by 100 along the view direction
-    viewdir.multiplyScalar (50);
+    viewdir.multiplyScalar(50);
     pos.add(viewdir);
     nav.setPosition(pos);
 }
