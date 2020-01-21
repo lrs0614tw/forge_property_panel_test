@@ -19,11 +19,11 @@ class Toolbar extends Autodesk.Viewing.Extension {
             'Autodesk.Research.TtIf.Extension.Toolbar.ControlGroup'
         );
         ctrlGroup.addClass('toolbar-vertical-group');
-        const modelStructurePanel = new ModelStructurePanel(viewer, '設備列表');
+        const modelStructurePanel = new ModelStructurePanel(viewer, '列表');
         // Names, icons and tooltips for our toolbar buttons
-        var names = ['CGB1', 'CGB2', 'CGB3'];
-        var icons = ['list', 'wrench', 'sunglasses'];
-        var tips = ['Equipment List', 'Show/Hide ToolBar', 'Isolate'];
+        var names = ['CGB1'];
+        var icons = ['list'];
+        var tips = ['Equipment List'];
         var buttonList=[];
         // Operations for when the buttons are clicked
         var clicks =
@@ -31,20 +31,6 @@ class Toolbar extends Autodesk.Viewing.Extension {
                 function () {
 
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                },
-                function () {
-                    viewer.toolbar.getControl('settingsTools').setVisible(true);
-                    viewer.toolbar.getControl('modelTools').setVisible(true);
-                    viewer.toolbar.getControl('navTools').setVisible(true);
-                    
-                },
-                function () { 
-                    var DBids = viewer.impl.selector.getAggregateSelection(); 
-                    try {
-                    viewer.isolate(DBids[0].selection);
-                    } catch (error) {
-                        buttonList[2].setState(Autodesk.Viewing.UI.Button.State.INACTIVE);
-                    }
                 }
             ]
         // Operations for when buttons are unclicked (i.e. toggled off)
@@ -53,14 +39,6 @@ class Toolbar extends Autodesk.Viewing.Extension {
             [
                 function () {
                     modelStructurePanel.setVisible(!modelStructurePanel.isVisible());
-                },
-                function () {
-                    viewer.toolbar.getControl('settingsTools').setVisible(false);
-                    viewer.toolbar.getControl('modelTools').setVisible(false);
-                    viewer.toolbar.getControl('navTools').setVisible(false);
-                },
-                function () {  
-                    viewer.showAll();
                 }
             ]
         // The loop to create our buttons

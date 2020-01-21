@@ -33,7 +33,6 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
         this.addVisibilityListener((show) => {
             if (!show) {
                 toolbar.addEventListener(Autodesk.Viewing.UI.Button.Event.STATE_CHANGED, "Autodesk.Research.TtIf.Extension.Toolbar.CGB1", Autodesk.Viewing.UI.Button.State.ACTIVE);
-
             };
 
             if (!this.uiCreated)
@@ -59,7 +58,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                 //for (let i = 0; i < result.properties.length; ++i) {
                 const prop = result.properties[0];
                 //check if we have a match
-                if (!nodeName.includes("洗衣机 [") && !nodeName.includes("卧式水泵1 [")) {
+                if (!nodeName.includes("RPC")) {
                     return resolve();
                 }
 
@@ -115,6 +114,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
 
     buildTree() {
         const viewer = this.viewer;
+        var customPropsPanel;
         viewer.getObjectTree(() => {
             const matches = [];
             const taskThunk = (model, dbId) => {
@@ -134,7 +134,7 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                         .on('select_node.jstree', function (e, data) {
                             //console.log(e, data);
                             if (!data) return;
-                            var customPropsPanel;
+                            
                             let dbIds = [];
                             viewer.clearSelection();
 
@@ -146,23 +146,25 @@ class ModelStructurePanel extends Autodesk.Viewing.UI.DockingPanel {
                                 dbIds = [dbId];
                             }
                             var color = new THREE.Color("rgba(255, 255, 255, 0.0)");
-                            viewer.setSelectionColor(color, Autodesk.Viewing.SelectionType.MIXED);
                             viewer.select(dbIds);
                             viewer.fitToView(dbIds);
-                            viewer.isolate(dbIds);
                             setTimeout(function () {
                                 zoom() //This will work fine
                             }, 1000)
-                            if (customPropsPanel != undefined) {
+                            if(customPropsPanel!=undefined)
+                            {
                                 customPropsPanel.setVisible(false);
-                                customPropsPanel = null;
+                                console.log(customPropsPanel);
+                                customPropsPanel=null;
                             }
-                            viewer.addEventListener(Autodesk.Viewing.TOOLBAR_CREATED_EVENT, () => { console.log(viewer.getPropertyPanel(true)) });
+                            else
+                            {
+                                console.log(undefined);
+                                
+                            }
                             customPropsPanel = new PropertiesPanel(viewer);
-                            viewer.addPanel(customPropsPanel);
                             customPropsPanel.setVisible(true);
                             customPropsPanel.setCProperties(dbIds);
-                            customPropsPanel.showEnd();
                         })
                         .jstree({
                             core: {

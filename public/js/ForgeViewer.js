@@ -26,9 +26,6 @@ function onDocumentLoadSuccess(doc) {
       var allDbIds = getAlldbIds(root);
       viewer.fitToView(allDbIds);
     });
-    viewer.toolbar.getControl('settingsTools').setVisible(false);
-    viewer.toolbar.getControl('modelTools').setVisible(false);
-    viewer.toolbar.getControl('navTools').setVisible(false);
   });
 
 }
